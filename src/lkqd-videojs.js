@@ -62,6 +62,15 @@ var LkqdVideoJS = (function() {
   };
 
   LkqdVideoJS.prototype._onVpaidLoaded = function() {
+    var _this = this;
+
+    var event = new CustomEvent('lkqd-vpaid-loaded', {
+      bubbles: true,
+      detail: _this
+    });
+
+    this.options.videoEl.dispatchEvent(event);
+
     this.vpaidClient = this.iframe.contentWindow.getVPAIDAd();
     this.vpaidClient.handshakeVersion('2.0');
 
@@ -83,17 +92,25 @@ var LkqdVideoJS = (function() {
   };
 
   LkqdVideoJS.prototype._onAdLoaded = function () {
-    if (!this.player.paused()) {
-      this.player.pause();
-    }
+    var _this = this;
 
-    this.vpaidClient.startAd();
+    var event = new CustomEvent('lkqd-ad-loaded', {
+      bubbles: true,
+      detail: _this
+    });
+
+    this.options.videoEl.dispatchEvent(event);
   };
 
   LkqdVideoJS.prototype._onAdStopped = function() {
-    if (this.player.paused()) {
-      this.player.play();
-    }
+    var _this = this;
+
+    var event = new CustomEvent('lkqd-ad-stopped', {
+      bubbles: true,
+      detail: _this
+    });
+
+    this.options.videoEl.dispatchEvent(event);
   };
 
   LkqdVideoJS.prototype._adTagParams = function() {

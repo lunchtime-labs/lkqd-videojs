@@ -1,6 +1,5 @@
 var _merge = require("lodash/merge");
 var iframeId = new Date().getTime().toString() + Math.round(Math.random() * 1000000000).toString();
-console.log(iframeId)
 
 var LkqdVideoJS = (function() {
   function LkqdVideoJS(player, options) {

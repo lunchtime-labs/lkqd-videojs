@@ -23,7 +23,7 @@ describe('LkqdVideoJS', function() {
   it("merges in values from the options array", function () {
     var expectedOptions = {
       adTagUrl: 'url?pid=1&sid=2&env=3&format=4',
-      videoEl: '',
+      videoEl: { dispatchEvent: function() {} },
       containerEl: '',
       isDebug: false,
       playerWidth: '',

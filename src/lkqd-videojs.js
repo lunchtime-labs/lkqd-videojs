@@ -116,8 +116,6 @@ var LkqdVideoJS = (function() {
 
     _this.options.videoEl.style.display = "none"
 
-    _this.vpaidClient.startAd();
-
     var event = new CustomEvent('lkqd-ad-loaded', {
       bubbles: true,
       detail: {

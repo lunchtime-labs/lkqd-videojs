@@ -7,7 +7,7 @@ var LkqdVideoJS = (function() {
 
     var defaults = {
       adTagUrl: '',
-      videoEl: '',
+      videoEl: { dispatchEvent: function() {} },
       containerEl: '',
       isDebug: false,
       playerWidth: '',

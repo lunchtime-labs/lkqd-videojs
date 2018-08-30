@@ -95,7 +95,7 @@ var LkqdVideoJS = (function() {
           playInitiation: 'auto',
           controls: false,
           volume: 100,
-          pageUrl: 'http://demo.lkqd.com',
+          pageUrl: window.location.host,
           trackImp: '',
           trackClick: '',
           custom1: '',

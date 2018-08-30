@@ -43,7 +43,10 @@ var LkqdVideoJS = (function() {
 
   LkqdVideoJS.prototype._onIframeLoaded = function() {
     var vpaidLoaderScript = this.iframe.contentWindow.document.createElement('script');
-    vpaidLoaderScript.src = 'https://ad.lkqd.net/vpaid/formats.js?pid=21&sid=71907'
+
+    var { pid, sid } = this._adTagParams();
+
+    vpaidLoaderScript.src = `https://ad.lkqd.net/vpaid/formats.js?pid=${pid}&sid=${sid}`
 
     vpaidLoaderScript.onload = this._onVpaidLoaded.bind(this);
 
@@ -68,6 +71,8 @@ var LkqdVideoJS = (function() {
     this.vpaidClient.subscribe(this._onAdStopped.bind(this), 'AdStopped');
     this.vpaidClient.subscribe(this._onAdError.bind(this), 'AdError');
 
+    var { pid, sid } = this._adTagParams();
+
     this.vpaidClient.initAd(
       this.options.playerWidth,
       this.options.playerHeight,
@@ -79,8 +84,8 @@ var LkqdVideoJS = (function() {
         videoSlot: this.options.videoEl,
         videoSlotCanAutoPlay: false,
         lkqdSettings: {
-          pid: 21,
-          sid: 71907,
+          pid: pid,
+          sid: sid,
           playerContainerId: this.options.containerEl.id,
           playerId: this.options.videoEl.id,
           playerWidth: this.options.playerWidth,

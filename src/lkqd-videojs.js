@@ -128,6 +128,10 @@ var LkqdVideoJS = (function() {
 
   LkqdVideoJS.prototype._onAdError = function() {
     console.error("Error loading LKQD Ad");
+
+    if (arguments.length) {
+      console.error(arguments)
+    }
   }
 
   LkqdVideoJS.prototype._onAdStopped = function() {

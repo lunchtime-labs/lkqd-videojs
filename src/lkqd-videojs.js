@@ -77,19 +77,19 @@ var LkqdVideoJS = (function() {
       this.options.creativeData,
       {
         slot: document.getElementById(this.options.containerEl.id),
-        videoSlot: null,
+        videoSlot: this.options.videoEl,
         videoSlotCanAutoPlay: false,
         lkqdSettings: {
           pid: 21,
           sid: 71907,
           playerContainerId: this.options.containerEl.id,
-          playerId: undefined,
+          playerId: this.options.videoEl.id,
           playerWidth: this.options.playerWidth,
           playerHeight: this.options.playerHeight,
           execution: 'inbanner',
           placement: '',
           playInitiation: 'auto',
-          controls: true,
+          controls: false,
           volume: 100,
           pageUrl: 'http://demo.lkqd.com',
           trackImp: '',
@@ -109,6 +109,8 @@ var LkqdVideoJS = (function() {
 
   LkqdVideoJS.prototype._onAdLoaded = function () {
     var _this = this;
+
+    _this.options.videoEl.style.display = "none"
 
     _this.vpaidClient.startAd();
 

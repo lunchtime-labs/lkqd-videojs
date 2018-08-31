@@ -8,7 +8,7 @@ var LkqdVideoJS = (function() {
     var defaults = {
       adTagUrl: '',
       videoEl: { dispatchEvent: function() {} },
-      containerEl: '',
+      containerEl: { dispatchEvent: function() {} },
       isDebug: false,
       playerWidth: '',
       playerHeight: '',
@@ -25,7 +25,7 @@ var LkqdVideoJS = (function() {
       detail: iframeId
     });
 
-    this.options.videoEl.dispatchEvent(event);
+    this.options.containerEl.dispatchEvent(event);
 
     this._create();
   }
@@ -61,7 +61,7 @@ var LkqdVideoJS = (function() {
       detail: _this
     });
 
-    this.options.videoEl.dispatchEvent(event);
+    this.options.containerEl.dispatchEvent(event);
 
     this.vpaidClient = this.iframe.contentWindow.getVPAIDAd();
     this.vpaidClient.handshakeVersion('2.0');
@@ -114,7 +114,9 @@ var LkqdVideoJS = (function() {
   LkqdVideoJS.prototype._onAdLoaded = function () {
     var _this = this;
 
-    _this.options.videoEl.style.display = "none"
+    if (_this.options.videoEl) {
+      _this.options.videoEl.style.display = "none";
+    }
 
     var event = new CustomEvent('lkqd-ad-loaded', {
       bubbles: true,
@@ -123,7 +125,7 @@ var LkqdVideoJS = (function() {
       }
     });
 
-    this.options.videoEl.dispatchEvent(event);
+    this.options.containerEl.dispatchEvent(event);
   };
 
   LkqdVideoJS.prototype._onAdError = function() {
@@ -142,7 +144,7 @@ var LkqdVideoJS = (function() {
       detail: _this
     });
 
-    this.options.videoEl.dispatchEvent(event);
+    this.options.containerEl.dispatchEvent(event);
   };
 
   LkqdVideoJS.prototype._adTagParams = function() {

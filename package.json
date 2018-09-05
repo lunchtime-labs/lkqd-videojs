@@ -12,7 +12,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.1",
     "gulp-util": "^3.0.7",
-    "jquery": "^2.1.4",
+    "jquery": "^3.3.1",
     "karma": "^0.13.16",
     "karma-browserify": "^4.4.2",
     "karma-chai": "^0.1.0",

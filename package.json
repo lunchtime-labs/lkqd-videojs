@@ -46,5 +46,8 @@
   "bugs": {
     "url": "https://github.com/lunchtime-labs/lkqd-videojs/issues"
   },
-  "homepage": "https://github.com/lunchtime-labs/lkqd-videojs#readme"
+  "homepage": "https://github.com/lunchtime-labs/lkqd-videojs#readme",
+  "dependencies": {
+    "babel-preset-es2015": "^6.24.1"
+  }
 }

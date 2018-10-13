@@ -1,5 +1,7 @@
-var _merge = require("lodash/merge");
-var iframeId = new Date().getTime().toString() + Math.round(Math.random() * 1000000000).toString();
+var _merge = require('lodash/merge');
+var iframeId =
+  new Date().getTime().toString() +
+  Math.round(Math.random() * 1000000000).toString();
 
 var LkqdVideoJS = (function() {
   function LkqdVideoJS(player, options) {
@@ -7,14 +9,14 @@ var LkqdVideoJS = (function() {
 
     var defaults = {
       adTagUrl: '',
-      videoEl: { dispatchEvent: function() {} },
-      containerEl: { dispatchEvent: function() {} },
+      videoEl: {dispatchEvent: function() {}},
+      containerEl: {dispatchEvent: function() {}},
       isDebug: false,
       playerWidth: '',
       playerHeight: '',
       viewMode: 'normal',
       creativeData: '',
-      publisherId: ''
+      publisherId: '',
     };
 
     this.options = _merge(defaults, options);
@@ -22,7 +24,7 @@ var LkqdVideoJS = (function() {
 
     var event = new CustomEvent('lkqd-detected', {
       bubbles: true,
-      detail: iframeId
+      detail: iframeId,
     });
 
     this.options.containerEl.dispatchEvent(event);
@@ -42,11 +44,13 @@ var LkqdVideoJS = (function() {
   };
 
   LkqdVideoJS.prototype._onIframeLoaded = function() {
-    var vpaidLoaderScript = this.iframe.contentWindow.document.createElement('script');
+    var vpaidLoaderScript = this.iframe.contentWindow.document.createElement(
+      'script',
+    );
 
-    var { pid, sid } = this._adTagParams();
+    var {pid, sid} = this._adTagParams();
 
-    vpaidLoaderScript.src = `https://ad.lkqd.net/vpaid/formats.js?pid=${pid}&sid=${sid}`
+    vpaidLoaderScript.src = `https://ad.lkqd.net/vpaid/formats.js?pid=${pid}&sid=${sid}`;
 
     vpaidLoaderScript.onload = this._onVpaidLoaded.bind(this);
 
@@ -58,7 +62,7 @@ var LkqdVideoJS = (function() {
 
     var event = new CustomEvent('lkqd-vpaid-loaded', {
       bubbles: true,
-      detail: _this
+      detail: _this,
     });
 
     this.options.containerEl.dispatchEvent(event);
@@ -71,13 +75,13 @@ var LkqdVideoJS = (function() {
     this.vpaidClient.subscribe(this._onAdStopped.bind(this), 'AdStopped');
     this.vpaidClient.subscribe(this._onAdError.bind(this), 'AdError');
 
-    var { pid, sid } = this._adTagParams();
+    var {pid, sid} = this._adTagParams();
 
     this.vpaidClient.initAd(
       this.options.playerWidth,
       this.options.playerHeight,
       this.options.viewMode,
-      600,  // @TODO: what is this?
+      600, // @TODO: what is this?
       this.options.creativeData,
       {
         slot: document.getElementById(this.options.containerEl.id),
@@ -90,7 +94,7 @@ var LkqdVideoJS = (function() {
           playerId: this.options.videoEl.id,
           playerWidth: this.options.playerWidth,
           playerHeight: this.options.playerHeight,
-          execution: 'inbanner',
+          execution: 'outstream',
           placement: '',
           playInitiation: 'auto',
           controls: false,
@@ -105,43 +109,48 @@ var LkqdVideoJS = (function() {
           dfp: false,
           lkqdId: iframeId,
           supplyContentVideo: {
-            url: '', clickUrl: '', play: 'post', volume: 100, loop: false
-          }
-        }
-    });
+            url: '',
+            clickUrl: '',
+            play: 'post',
+            volume: 100,
+            loop: false,
+          },
+        },
+      },
+    );
   };
 
-  LkqdVideoJS.prototype._onAdLoaded = function () {
+  LkqdVideoJS.prototype._onAdLoaded = function() {
     var _this = this;
 
     if (_this.options.videoEl) {
-      _this.options.videoEl.style.display = "none";
+      _this.options.videoEl.style.display = 'none';
     }
 
     var event = new CustomEvent('lkqd-ad-loaded', {
       bubbles: true,
       detail: {
-        iframeId
-      }
+        iframeId,
+      },
     });
 
     this.options.containerEl.dispatchEvent(event);
   };
 
   LkqdVideoJS.prototype._onAdError = function() {
-    console.error("Error loading LKQD Ad");
+    console.error('Error loading LKQD Ad');
 
     if (arguments.length) {
-      console.error(arguments)
+      console.error(arguments);
     }
-  }
+  };
 
   LkqdVideoJS.prototype._onAdStopped = function() {
     var _this = this;
 
     var event = new CustomEvent('lkqd-ad-stopped', {
       bubbles: true,
-      detail: _this
+      detail: _this,
     });
 
     this.options.containerEl.dispatchEvent(event);
@@ -152,7 +161,7 @@ var LkqdVideoJS = (function() {
 
     var queryString = this.options.adTagUrl.split('?');
     if (queryString.length <= 1) {
-      return
+      return;
     }
 
     queryString[1].split('&').forEach(function(param) {

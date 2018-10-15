@@ -149,7 +149,6 @@ var LkqdVideoJS = (function() {
   LkqdVideoJS.prototype._onAdStarted = function() {
     var _this = this;
 
-    debugger;
     var event = new CustomEvent('lkqd-ad-started', {
       bubbles: true,
       detail: _this,

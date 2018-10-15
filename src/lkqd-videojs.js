@@ -71,6 +71,7 @@ var LkqdVideoJS = (function() {
     this.vpaidClient.handshakeVersion('2.0');
 
     // VPAID event handlers
+    this.vpaidClient.subscribe(this._onAdStarted.bind(this), 'AdStarted');
     this.vpaidClient.subscribe(this._onAdLoaded.bind(this), 'AdLoaded');
     this.vpaidClient.subscribe(this._onAdStopped.bind(this), 'AdStopped');
     this.vpaidClient.subscribe(this._onAdError.bind(this), 'AdError');
@@ -143,6 +144,18 @@ var LkqdVideoJS = (function() {
     if (arguments.length) {
       console.error(arguments);
     }
+  };
+
+  LkqdVideoJS.prototype._onAdStarted = function() {
+    var _this = this;
+
+    debugger;
+    var event = new CustomEvent('lkqd-ad-started', {
+      bubbles: true,
+      detail: _this,
+    });
+
+    this.options.containerEl.dispatchEvent(event);
   };
 
   LkqdVideoJS.prototype._onAdStopped = function() {
